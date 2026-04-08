@@ -56,7 +56,9 @@ def get_locale():
         return g.user["locale"]
 
     # 3. Browser header
-    browser_locale = request.accept_languages.best_match(app.config["LANGUAGES"])
+    browser_locale = request.accept_languages.best_match(
+        app.config["LANGUAGES"]
+    )
     if browser_locale:
         return browser_locale
 
