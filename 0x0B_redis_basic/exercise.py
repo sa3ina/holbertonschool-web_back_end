@@ -9,6 +9,7 @@ from functools import wraps
 
 
 def call_history(method: Callable) -> Callable:
+    """Stores input and output history of a function in Redis lists."""
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         inputs_key = f"{method.__qualname__}:inputs"
