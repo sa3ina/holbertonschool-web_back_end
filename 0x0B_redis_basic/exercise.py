@@ -44,6 +44,8 @@ def replay(method):
         print(f"{key}(*{inp.decode('utf-8')}) -> {out.decode('utf-8')}")
 
 class Cache:
+    """Redis caching system for storing data with call history support."""
+    
     def __init__(self):
         self._redis = redis.Redis()
         self._redis.flushdb()
