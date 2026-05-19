@@ -21,6 +21,7 @@ if AUTH_TYPE == "auth":
     from api.v1.auth.auth import Auth
     auth = Auth()
 
+
 @app.errorhandler(404)
 def not_found(error) -> str:
     """ Not found handler
@@ -39,6 +40,7 @@ def unauthorized(error) -> str:
 def forbidden(error):
     """ Forbidden handler """
     return jsonify({"error": "Forbidden"}), 403
+
 
 @app.before_request
 def before_request():
