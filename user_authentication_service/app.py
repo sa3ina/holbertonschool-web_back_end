@@ -19,7 +19,9 @@ def hello_world() -> str:
 
 @app.route('/users', methods=['POST'])
 def register_user() -> str:
-
+    """ POST /users
+    Registers a user, returns JSON payload
+    Email and pswd fields in x-www-form-urlencoded request"""
     try:
         email = request.form['email']
         password = request.form['password']
