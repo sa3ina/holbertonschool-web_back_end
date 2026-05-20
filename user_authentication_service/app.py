@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+"""
+Authentication Flask app module.
+
+This module defines routes for user registration, login,
+session management, profile access, and password reset.
+"""
+
 
 from flask import Flask
 from flask import jsonify
