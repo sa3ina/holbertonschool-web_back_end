@@ -9,7 +9,7 @@ function outer () {
         let exclamation = "!";
 
         function inception () {
-            alert(`${globalVariable} ${course} ${exclamation}`);
+            alert(`${globalVariable} ${course}${exclamation}`);
         }
 
         inception();
