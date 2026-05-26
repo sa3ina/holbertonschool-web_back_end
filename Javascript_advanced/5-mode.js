@@ -29,9 +29,9 @@ function main () {
     button_scream_mode.innerHTML = "Scream mode";
     document.body.appendChild(button_scream_mode);
 
-    button_spooky.addEventListener("click", () => spooky());
-    button_dark_mode.addEventListener("click", () => darkMode());
-    button_scream_mode.addEventListener("click", () => screamMode());
+    button_spooky.onclick = spooky;
+    button_dark_mode.onclick = darkMode;
+    button_scream_mode.onclick = screamMode;
 }
 
 main();
