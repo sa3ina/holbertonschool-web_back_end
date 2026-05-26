@@ -1,23 +1,32 @@
+#!/usr/bin/env node
+
+// Reuse the countPrimeNumbers function from 10-prime.js
 function countPrimeNumbers() {
-    let counter = 0;
-    for (let i = 2; i <= 100; i++) {
-        let flag = 0;
+    let count = 0;
 
-        for (let x = 2; x < i; x++) {
-            if (i % x === 0) {
-                flag = 1;
-                break;
-            }
+    function isPrime(num) {
+        if (num < 2) return false;
+        for (let i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i === 0) return false;
         }
-        if (i > 1 && flag == 0)
-            counter += 1;
-    };
-    return counter;
-};
+        return true;
+    }
 
-const startTime = performance.now();
-for (let i = 0; i < 100; i++) {
-    countPrimeNumbers();
+    for (let i = 2; i <= 100; i++) {
+        if (isPrime(i)) count++;
+    }
+
+    return count;
 }
-const endTime = performance.now();
-console.log(`Execution time of calculating prime numbers 100 times was ${endTime - startTime} milliseconds`);
+
+// Using setTimeout to change the stack order
+setTimeout(() => {
+    const start = performance.now();
+
+    for (let i = 0; i < 100; i++) {
+        countPrimeNumbers();
+    }
+
+    const end = performance.now();
+    console.log(`Execution time of calculating prime numbers 100 times was ${end - start} milliseconds`);
+}, 0);
