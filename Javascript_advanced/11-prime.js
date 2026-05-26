@@ -19,13 +19,12 @@ function countPrimeNumbers() {
     return count;
 }
 
+let startTime = performance.now();
+
 setTimeout(() => {
+    for (let i = 0; i < 100; i++) {
+        countPrimeNumbers();
+    }
     let endTime = performance.now();
     console.log(`Execution time of calculating prime numbers 100 times was ${endTime - startTime} milliseconds.`);
 }, 0);
-
-let startTime = performance.now();
-for (let i = 0; i < 100; i++) {
-    countPrimeNumbers();
-}
-let endTime = performance.now();
