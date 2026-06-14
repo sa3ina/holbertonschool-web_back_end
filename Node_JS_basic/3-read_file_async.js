@@ -1,48 +1,27 @@
 const fs = require('fs');
 
 function countStudents(path) {
-    return new Promise((resolve, reject) => {
-        fs.readFile(path, 'utf8', (err, data) => {
-            if (err) {
-                reject(Error('Cannot load the database'));
-                return;
-            }
-            const response = [];
-            let msg;
+  return fs.promises.readFile(path, 'utf8')
+    .then((data) => {
+      const rows = data.split('\n').filter((line) => line.trim() !== '');
+      const students = rows.slice(1);
+      const byField = {};
 
-            const content = data.toString().split('\n');
+      students.forEach((student) => {
+        const [firstname, , , field] = student.split(',');
+        if (!byField[field]) {
+          byField[field] = [];
+        }
+        byField[field].push(firstname);
+      });
 
-            let students = content.filter((item) => item);
-
-            students = students.map((item) => item.split(','));
-
-            const NUMBER_OF_STUDENTS = students.length ? students.length - 1 : 0;
-            msg = `Number of students: ${NUMBER_OF_STUDENTS}`;
-            console.log(msg);
-
-            response.push(msg);
-
-            const fields = {};
-            for (const i in students) {
-                if (i !== 0) {
-                    if (!fields[students[i][3]]) fields[students[i][3]] = [];
-
-                    fields[students[i][3]].push(students[i][0]);
-                }
-            }
-
-            delete fields.field;
-
-            for (const key of Object.keys(fields)) {
-                msg = `Number of students in ${key}: ${fields[key].length
-                    }. List: ${fields[key].join(', ')}`;
-
-                console.log(msg);
-
-                response.push(msg);
-            }
-            resolve(response);
-        });
+      console.log(`Number of students: ${students.length}`);
+      Object.keys(byField).forEach((field) => {
+        console.log(`Number of students in ${field}: ${byField[field].length}. List: ${byField[field].join(', ')}`);
+      });
+    })
+    .catch(() => {
+      throw new Error('Cannot load the database');
     });
 }
 
